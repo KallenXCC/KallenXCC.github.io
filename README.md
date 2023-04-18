@@ -1,9 +1,9 @@
-# h1 Heading 8-)
-## h2 Heading
-### h3 Heading
-#### h4 Heading
-##### h5 Heading
-###### h6 Heading
+# 4/17/23
+## Testing developerFolio
+### Spent the day getting it running
+#### It's cool but not what I'm looking for
+##### At least got some experience with Node, nvm, npm, and Docker
+###### Will try a different approach tomorrow
 
 
 ## Horizontal Rules
