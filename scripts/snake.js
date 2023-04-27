@@ -4,6 +4,9 @@ var context = canvas.getContext('2d');
 canvas.width = 500;
 canvas.height = 500;
 
+context.fillStyle = 'black';
+context.fillRect(0, 0, canvas.width, canvas.height);
+
 var grid = 20;
 var count = 0;
   
@@ -42,7 +45,7 @@ function loop() {
   }
 
   count = 0;
-  context.clearRect(0,0,canvas.width,canvas.height);
+  //context.clearRect(0,0,canvas.width,canvas.height);
 
   // move snake by it's velocity
   snake.x += snake.dx;
@@ -69,7 +72,8 @@ function loop() {
 
   // remove cells as we move away from them
   if (snake.cells.length > snake.maxCells) {
-    snake.cells.pop();
+    tail = snake.cells.pop();
+    context.clearRect(tail.x, tail.y, grid, grid);
   }
 
   // draw apple
@@ -194,7 +198,7 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-//detectSwipe(canvas, moveSnake);
+detectSwipe(canvas, moveSnake);
 
 // start the game
 requestAnimationFrame(loop);
