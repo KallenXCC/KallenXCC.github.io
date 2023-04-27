@@ -15,8 +15,8 @@ var snake = {
   y: 100,
   
   // snake velocity. moves one grid length every frame in either the x or y direction
-  dx: grid,
-  dy: 0,
+  dx: 0,
+  dy: grid,
   
   // keep track of all grids the snake body occupies
   cells: [],
@@ -107,8 +107,8 @@ function loop() {
         snake.y = 100;
         snake.cells = [];
         snake.maxCells = 4;
-        snake.dx = grid;
-        snake.dy = 0;
+        snake.dx = 0;
+        snake.dy = grid;
 
         apple.x = getRandomInt(0, 25) * grid;
         apple.y = getRandomInt(0, 25) * grid;
