@@ -76,6 +76,9 @@ function loop() {
     context.clearRect(tail.x, tail.y, grid, grid);
   }
 
+  head = snake.cells.at(0);
+  context.clearRect(head.x, head.y, grid, grid);
+
   // draw apple
   context.fillStyle = 'red';
   context.fillRect(apple.x, apple.y, grid-1, grid-1);
@@ -104,7 +107,7 @@ function loop() {
         context.fillStyle = 'black';
         context.fillRect(0, 0, canvas.width, canvas.height);
         snake.x = 160;
-        snake.y = 100;
+        snake.y = 160;
         snake.cells = [];
         snake.maxCells = 4;
         snake.dx = 0;
