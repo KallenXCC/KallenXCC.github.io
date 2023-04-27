@@ -5,7 +5,7 @@ canvas.width = 800;
 canvas.height = 800;
 
 var background = new Image();
-background.src = "pictures/BB_LinkedIn.jpg";
+background.src = "../pictures/BB_LinkedIn.jpg";
 
 // Make sure the image is loaded first otherwise nothing will draw.
 background.onload = function(){
