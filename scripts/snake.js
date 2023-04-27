@@ -1,8 +1,8 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
-canvas.width = 400;
-canvas.height = 267;
+canvas.width = 900;
+canvas.height = 600;
 
 var background = new Image();
 background.src = "kallenxcc.github.io/pictures/BB_LinkedIn.jpg";
@@ -85,7 +85,7 @@ function loop() {
   context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
   // draw snake one cell at a time
-  context.fillStyle = 'cyan';
+  context.fillStyle = 'aqua';
   snake.cells.forEach(function(cell, index) {
     
     // drawing 1 px smaller than the grid creates a grid effect in the snake body so you can see how long it is
