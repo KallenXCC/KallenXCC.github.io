@@ -1,18 +1,18 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
-canvas.width = 500;
-canvas.height = 500;
+canvas.width = 400;
+canvas.height = 400;
 
 context.fillStyle = 'black';
 context.fillRect(0, 0, canvas.width, canvas.height);
 
-var grid = 20;
+var grid = 16;
 var count = 0;
   
 var snake = {
   x: 160,
-  y: 100,
+  y: 160,
   
   // snake velocity. moves one grid length every frame in either the x or y direction
   dx: 0,
