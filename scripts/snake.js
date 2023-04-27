@@ -12,7 +12,7 @@ var count = 0;
   
 var snake = {
   x: 160,
-  y: 160,
+  y: 100,
   
   // snake velocity. moves one grid length every frame in either the x or y direction
   dx: grid,
@@ -101,8 +101,10 @@ function loop() {
       
       // snake occupies same space as a body part. reset game
       if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+        context.fillStyle = 'black';
+        context.fillRect(0, 0, canvas.width, canvas.height);
         snake.x = 160;
-        snake.y = 160;
+        snake.y = 100;
         snake.cells = [];
         snake.maxCells = 4;
         snake.dx = grid;
