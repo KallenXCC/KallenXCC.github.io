@@ -9,7 +9,7 @@ background.src = "pictures/BB_LinkedIn.jpg";
 
 // Make sure the image is loaded first otherwise nothing will draw.
 background.onload = function(){
-    ctx.drawImage(background,0,0);   
+    context.drawImage(background,0,0);   
 }
 
 var grid = 16;
