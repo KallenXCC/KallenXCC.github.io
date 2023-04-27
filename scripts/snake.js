@@ -1,8 +1,8 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
-canvas.width = 800;
-canvas.height = 800;
+canvas.width = 400;
+canvas.height = 400;
 
 var background = new Image();
 background.src = "kallenxcc.github.io/pictures/BB_LinkedIn.jpg";
@@ -210,7 +210,7 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-detectSwipe(canvas, moveSnake);
+//detectSwipe(canvas, moveSnake);
 
 // start the game
 requestAnimationFrame(loop);
