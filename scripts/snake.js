@@ -115,46 +115,6 @@ function loop() {
   });
 }
 
-function detectSwipe(el,func) {
-  swipe_det = new Object();
-  swipe_det.sX = 0; swipe_det.sY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
-  var min_x = 30;  //min x swipe for horizontal swipe
-  var max_x = 30;  //max x difference for vertical swipe
-  var min_y = 50;  //min y swipe for vertical swipe
-  var max_y = 60;  //max y difference for horizontal swipe
-  var direc = "";
-  ele = document.getElementById(el);
-  ele.addEventListener('touchstart',function(e){
-    var t = e.touches[0];
-    swipe_det.sX = t.screenX; 
-    swipe_det.sY = t.screenY;
-  },false);
-  ele.addEventListener('touchmove',function(e){
-    e.preventDefault();
-    var t = e.touches[0];
-    swipe_det.eX = t.screenX; 
-    swipe_det.eY = t.screenY;    
-  },false);
-  ele.addEventListener('touchend',function(e){
-    //horizontal detection
-    if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y) && (swipe_det.eX > 0)))) {
-      if(swipe_det.eX > swipe_det.sX) direc = "r";
-      else direc = "l";
-    }
-    //vertical detection
-    else if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x) && (swipe_det.eY > 0)))) {
-      if(swipe_det.eY > swipe_det.sY) direc = "d";
-      else direc = "u";
-    }
-
-    if (direc != "") {
-      if(typeof func == 'function') func(el,direc);
-    }
-    direc = "";
-    swipe_det.sX = 0; swipe_det.sY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
-  },false);  
-}
-
 function moveSnake(dir) {
   // prevent snake from backtracking on itself by checking that it's 
   // not already moving on the same axis (pressing left while moving
@@ -198,7 +158,51 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-//detectSwipe(canvas, moveSnake);
+document.addEventListener('touchstart', handleTouchStart, false);        
+document.addEventListener('touchmove', handleTouchMove, false);
+
+var xDown = null;                                                        
+var yDown = null;
+
+function getTouches(evt) {
+  return evt.touches ||             // browser API
+         evt.originalEvent.touches; // jQuery
+}                                                     
+                                                                         
+function handleTouchStart(evt) {
+    const firstTouch = getTouches(evt)[0];                                      
+    xDown = firstTouch.clientX;                                      
+    yDown = firstTouch.clientY;                                      
+};                                                
+                                                                         
+function handleTouchMove(evt) {
+    if ( ! xDown || ! yDown ) {
+        return;
+    }
+
+    var xUp = evt.touches[0].clientX;                                    
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+                                                                         
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff > 0 ) {
+            moveSnake("r"); 
+        } else {
+            moveSnake("l");
+        }                       
+    } else {
+        if ( yDiff > 0 ) {
+            moveSnake("d"); 
+        } else { 
+            moveSnake("u");
+        }                                                                 
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;                                             
+};
 
 // start the game
 requestAnimationFrame(loop);
