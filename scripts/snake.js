@@ -1,6 +1,17 @@
 var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
+canvas.width = 800;
+canvas.height = 800;
+
+var background = new Image();
+background.src = "pictures/BB_LinkedIn.jpg";
+
+// Make sure the image is loaded first otherwise nothing will draw.
+background.onload = function(){
+    ctx.drawImage(background,0,0);   
+}
+
 var grid = 16;
 var count = 0;
   
