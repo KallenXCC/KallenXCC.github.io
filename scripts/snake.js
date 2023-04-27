@@ -198,7 +198,7 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-detectSwipe(canvas, moveSnake);
+//detectSwipe(canvas, moveSnake);
 
 // start the game
 requestAnimationFrame(loop);
