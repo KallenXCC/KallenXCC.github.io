@@ -119,14 +119,6 @@ function loop() {
   });
 }
 
-// Directions enumeration
-const directions = Object.freeze({
-  UP: 'up',
-  DOWN: 'down',
-  RIGHT: 'right',
-  LEFT: 'left'
-})
-
 function detectSwipe(el,func) {
   swipe_det = new Object();
   swipe_det.sX = 0; swipe_det.sY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
@@ -150,13 +142,13 @@ function detectSwipe(el,func) {
   ele.addEventListener('touchend',function(e){
     //horizontal detection
     if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y) && (swipe_det.eX > 0)))) {
-      if(swipe_det.eX > swipe_det.sX) direc = RIGHT;
-      else direc = LEFT;
+      if(swipe_det.eX > swipe_det.sX) direc = "r";
+      else direc = "l";
     }
     //vertical detection
     else if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x) && (swipe_det.eY > 0)))) {
-      if(swipe_det.eY > swipe_det.sY) direc = DOWN;
-      else direc = UP;
+      if(swipe_det.eY > swipe_det.sY) direc = "d";
+      else direc = "u";
     }
 
     if (direc != "") {
@@ -172,19 +164,19 @@ function moveSnake(dir) {
   // not already moving on the same axis (pressing left while moving
   // left won't do anything, and pressing right while moving left
   // shouldn't let you collide with your own body)
-  if (dir === LEFT && snake.dx === 0) {
+  if (dir === "l" && snake.dx === 0) {
     snake.dx = -grid;
     snake.dy = 0;
   }
-  else if (dir === UP && snake.dy === 0) {
+  else if (dir === "u" && snake.dy === 0) {
     snake.dy = -grid;
     snake.dx = 0;
   }
-  else if (dir === RIGHT && snake.dx === 0) {
+  else if (dir === "r" && snake.dx === 0) {
     snake.dx = grid;
     snake.dy = 0;
   }
-  else if (dir === DOWN && snake.dy === 0) {
+  else if (dir === "d" && snake.dy === 0) {
     snake.dy = grid;
     snake.dx = 0;
   }
@@ -194,19 +186,19 @@ function moveSnake(dir) {
 document.addEventListener('keydown', function(e) {
   // left arrow key
   if (e.which === 37) {
-    moveSnake(LEFT);
+    moveSnake("l");
   }
   // up arrow key
   else if (e.which === 38) {
-    moveSnake(UP);
+    moveSnake("u");
   }
   // right arrow key
   else if (e.which === 39) {
-    moveSnake(RIGHT);
+    moveSnake("r");
   }
   // down arrow key
   else if (e.which === 40) {
-    moveSnake(DOWN);
+    moveSnake("d");
   }
 });
 
