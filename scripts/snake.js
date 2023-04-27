@@ -5,7 +5,7 @@ canvas.width = 800;
 canvas.height = 800;
 
 var background = new Image();
-background.src = "../pictures/BB_LinkedIn.jpg";
+background.src = "kallenxcc.github.io/pictures/BB_LinkedIn.jpg";
 
 // Make sure the image is loaded first otherwise nothing will draw.
 background.onload = function(){
@@ -119,34 +119,98 @@ function loop() {
   });
 }
 
-// listen to keyboard events to move the snake
-document.addEventListener('keydown', function(e) {
+// Tune deltaMin according to your needs. Near 0 it will almost
+// always trigger, with a big value it can never trigger.
+function detectSwipe(id, func, deltaMin = 90) {
+  const swipe_det = {
+    sX: 0,
+    sY: 0,
+    eX: 0,
+    eY: 0
+  }
+  // Directions enumeration
+  const directions = Object.freeze({
+    UP: 'up',
+    DOWN: 'down',
+    RIGHT: 'right',
+    LEFT: 'left'
+  })
+  let direction = null
+  const el = document.getElementById(id)
+  el.addEventListener('touchstart', function(e) {
+    const t = e.touches[0]
+    swipe_det.sX = t.screenX
+    swipe_det.sY = t.screenY
+  }, false)
+  el.addEventListener('touchmove', function(e) {
+    // Prevent default will stop user from scrolling, use with care
+    // e.preventDefault();
+    const t = e.touches[0]
+    swipe_det.eX = t.screenX
+    swipe_det.eY = t.screenY
+  }, false)
+  el.addEventListener('touchend', function(e) {
+    const deltaX = swipe_det.eX - swipe_det.sX
+    const deltaY = swipe_det.eY - swipe_det.sY
+    // Min swipe distance, you could use absolute value rather
+    // than square. It just felt better for personnal use
+    if (deltaX ** 2 + deltaY ** 2 < deltaMin ** 2) return
+    // horizontal
+    if (deltaY === 0 || Math.abs(deltaX / deltaY) > 1)
+      direction = deltaX > 0 ? directions.RIGHT : directions.LEFT
+    else // vertical
+      direction = deltaY > 0 ? directions.UP : directions.DOWN
+
+    if (direction && typeof func === 'function') func(el, direction)
+
+    direction = null
+  }, false)
+}
+
+function moveSnake(dir) {
   // prevent snake from backtracking on itself by checking that it's 
   // not already moving on the same axis (pressing left while moving
   // left won't do anything, and pressing right while moving left
   // shouldn't let you collide with your own body)
-  
-  // left arrow key
-  if (e.which === 37 && snake.dx === 0) {
+  if (dir === LEFT && snake.dx === 0) {
     snake.dx = -grid;
     snake.dy = 0;
   }
-  // up arrow key
-  else if (e.which === 38 && snake.dy === 0) {
+  else if (dir === UP && snake.dy === 0) {
     snake.dy = -grid;
     snake.dx = 0;
   }
-  // right arrow key
-  else if (e.which === 39 && snake.dx === 0) {
+  else if (dir === RIGHT && snake.dx === 0) {
     snake.dx = grid;
     snake.dy = 0;
   }
-  // down arrow key
-  else if (e.which === 40 && snake.dy === 0) {
+  else if (dir === DOWN && snake.dy === 0) {
     snake.dy = grid;
     snake.dx = 0;
   }
+}
+
+// listen to keyboard events to move the snake
+document.addEventListener('keydown', function(e) {
+  // left arrow key
+  if (e.which === 37) {
+    moveSnake(LEFT);
+  }
+  // up arrow key
+  else if (e.which === 38) {
+    moveSnake(UP);
+  }
+  // right arrow key
+  else if (e.which === 39) {
+    moveSnake(RIGHT);
+  }
+  // down arrow key
+  else if (e.which === 40) {
+    moveSnake(DOWN);
+  }
 });
+
+detectSwipe(canvas, moveSnake);
 
 // start the game
 requestAnimationFrame(loop);
