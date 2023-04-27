@@ -4,15 +4,7 @@ var context = canvas.getContext('2d');
 canvas.width = 500;
 canvas.height = 500;
 
-var background = new Image();
-background.src = "kallenxcc.github.io/pictures/BB_LinkedIn.jpg";
-
-// Make sure the image is loaded first otherwise nothing will draw.
-background.onload = function(){
-    context.drawImage(background,0,0);   
-}
-
-var grid = 16;
+var grid = 20;
 var count = 0;
   
 var snake = {
