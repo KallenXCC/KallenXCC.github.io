@@ -2,7 +2,7 @@ var canvas = document.getElementById('game');
 var context = canvas.getContext('2d');
 
 canvas.width = 400;
-canvas.height = 400;
+canvas.height = 267;
 
 var background = new Image();
 background.src = "kallenxcc.github.io/pictures/BB_LinkedIn.jpg";
