@@ -190,15 +190,15 @@ function handleTouchMove(evt) {
                                                                          
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
-            moveSnake("r"); 
+            moveSnake("l"); 
         } else {
-            moveSnake("l");
+            moveSnake("r");
         }                       
     } else {
         if ( yDiff > 0 ) {
-            moveSnake("d"); 
+            moveSnake("u"); 
         } else { 
-            moveSnake("u");
+            moveSnake("d");
         }                                                                 
     }
     /* reset values */
