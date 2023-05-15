@@ -145,20 +145,20 @@ function moveSnake(dir) {
 
 // listen to keyboard events to move the snake
 document.addEventListener('keydown', function(e) {
-  // left arrow key
-  if (e.which === 37) {
+  // left arrow key or 'A' key
+  if (e.which === 37 || e.which === 65) {
     moveSnake("l");
   }
-  // up arrow key
-  else if (e.which === 38) {
+  // up arrow key or w key
+  else if (e.which === 38 || e.which === 87) {
     moveSnake("u");
   }
-  // right arrow key
-  else if (e.which === 39) {
+  // right arrow key or d key
+  else if (e.which === 39 || e.which === 68) {
     moveSnake("r");
   }
-  // down arrow key
-  else if (e.which === 40) {
+  // down arrow key or s key
+  else if (e.which === 40 || e.which === 83) {
     moveSnake("d");
   }
 });
