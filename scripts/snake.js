@@ -11,13 +11,15 @@ var grid = 16;
 var count = 0;
 
 var score = 0;
+document.getElementById("displayScore").innerHTML = score;
 var highScore = localStorage.getItem("highScore");
 if (highScore !== null) {
   // Use the saved score in your game logic
-  console.log("High score:", highScore);
+  console.log("High Score:", highScore);
 } else {
   highScore = 0;
 }
+document.getElementById("displayHighScore").innerHTML = highScore;
   
 var snake = {
   x: 160,
@@ -42,14 +44,6 @@ var apple = {
 // @see https://stackoverflow.com/a/1527820/2124254
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function updateScore() {
-  document.getElementById("displayScore").innerHTML = score;
-}
-
-function updateHighScore() {
-  document.getElementById("displayHighScore").innerHTML = highScore;
 }
 
 // game loop
@@ -111,7 +105,7 @@ function loop() {
     if (cell.x === apple.x && cell.y === apple.y) {
       snake.maxCells++;
       score += 100;
-      updateScore();
+      document.getElementById("displayScore").innerHTML = score;
 
       // canvas is 400x400 which is 25x25 grids 
       apple.x = getRandomInt(0, 25) * grid;
@@ -137,7 +131,7 @@ function loop() {
 
         if (score > highScore) {
           highScore = score;
-          updateHighScore();        
+          document.getElementById("displayHighScore").innerHTML = highScore;        
           if(localStorage) {
             localStorage.setItem("highScore", score);
           }
