@@ -14,7 +14,7 @@ var score = 0;
 var highScore = localStorage.getItem("highScore");
 if (highScore !== null) {
   // Use the saved score in your game logic
-  console.log("High score:", savedScore);
+  console.log("High score:", highScore);
 } else {
   highScore = 0;
 }
