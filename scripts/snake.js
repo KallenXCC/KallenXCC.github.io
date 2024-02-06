@@ -137,6 +137,7 @@ function loop() {
           }
         }
         score = 0;
+        document.getElementById("displayScore").innerHTML = score;
       }
     }
   });
