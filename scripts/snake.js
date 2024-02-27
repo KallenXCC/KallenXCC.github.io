@@ -91,7 +91,7 @@ function loop() {
   context.clearRect(head.x, head.y, grid, grid);
 
   // draw apple
-  context.fillStyle = 'cyan';
+  context.fillStyle = '#66FFFF';
   context.fillRect(apple.x, apple.y, grid-1, grid-1);
 
   // draw snake one cell at a time
